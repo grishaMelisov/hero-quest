@@ -1,112 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Kelly+Slab&family=Alumni+Sans:wght@400;600&display=swap');
 @import 'tailwindcss';
 
-/* :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+@theme {
+  /* ── Шрифты ── */
+  --font-kelly: 'Kelly Slab', serif;
+  --font-alumni: 'Alumni Sans', sans-serif;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  /* ── Фоны ── */
+  --color-bg-page: #141414;
+  --color-bg-section: #1a1a1a;
+  --color-bg-card: #1e1e1e;
+  --color-bg-modal: #242424;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* ── Акцент ── */
+  --color-brand: #e03131;
+  --color-brand-hover: #c92a2a;
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  /* ── Текст ── */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a0a0a0;
+  --color-text-muted: #666666;
+
+  /* ── Бордеры ── */
+  --color-border: #2e2e2e;
+  --color-border-active: #e03131;
+
+  /* ── Радиусы ── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* ── Типографика — Kelly Slab ── */
+  --text-nav: 20px;
+  --text-nav--lh: 20px;
+
+  --text-page-title: 64px;
+  --text-page-title--lh: 64px;
+
+  --text-section-title: 44px;
+  --text-section-title--lh: 44px;
+
+  --text-footer-link: 20px;
+  --text-footer-link--lh: 20px;
+
+  --text-drum-value: 32px;
+  --text-drum-value--lh: 32px;
+
+  /* ── Типографика — Alumni Sans ── */
+  --text-block-title: 32px;
+  --text-block-title--lh: 32px;
+
+  --text-block-desc: 20px;
+  --text-block-desc--lh: 20px;
+
+  --text-drum-label: 24px;
+  --text-drum-label--lh: 24px;
+
+  --text-day-counter: 44px;
+  --text-day-counter--lh: 44px;
+
+  --text-footer-heading: 24px;
+  --text-footer-heading--lh: 24px;
+
+  --text-btn: 24px;
+  --text-btn--lh: 24px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+/* ── Глобал ── */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 body {
+  background-color: var(--color-bg-page);
+  color: var(--color-text-primary);
+  font-family: var(--font-kelly);
   margin: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+/* ── Типографические утилиты ── */
+.text-nav {
+  font-family: var(--font-kelly);
+  font-size: var(--text-nav);
+  line-height: var(--text-nav--lh);
+  font-weight: 400;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
+.text-page-title {
+  font-family: var(--font-kelly);
+  font-size: var(--text-page-title);
+  line-height: var(--text-page-title--lh);
+  font-weight: 400;
+  text-transform: uppercase;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+.text-section-title {
+  font-family: var(--font-kelly);
+  font-size: var(--text-section-title);
+  line-height: var(--text-section-title--lh);
+  font-weight: 400;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
-} */
+.text-footer-link {
+  font-family: var(--font-kelly);
+  font-size: var(--text-footer-link);
+  line-height: var(--text-footer-link--lh);
+  font-weight: 400;
+}
+
+.text-drum-value {
+  font-family: var(--font-kelly);
+  font-size: var(--text-drum-value);
+  line-height: var(--text-drum-value--lh);
+  font-weight: 400;
+}
+
+.text-block-title {
+  font-family: var(--font-alumni);
+  font-size: var(--text-block-title);
+  line-height: var(--text-block-title--lh);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.text-block-desc {
+  font-family: var(--font-alumni);
+  font-size: var(--text-block-desc);
+  line-height: var(--text-block-desc--lh);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.text-drum-label {
+  font-family: var(--font-alumni);
+  font-size: var(--text-drum-label);
+  line-height: var(--text-drum-label--lh);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.text-day-counter {
+  font-family: var(--font-alumni);
+  font-size: var(--text-day-counter);
+  line-height: var(--text-day-counter--lh);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+
+.text-footer-heading {
+  font-family: var(--font-alumni);
+  font-size: var(--text-footer-heading);
+  line-height: var(--text-footer-heading--lh);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.text-btn {
+  font-family: var(--font-alumni);
+  font-size: var(--text-btn);
+  line-height: var(--text-btn--lh);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
