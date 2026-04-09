@@ -7,9 +7,9 @@
   --font-alumni: 'Alumni Sans', sans-serif;
 
   /* ── Фоны ── */
-  --color-bg-page: #141414;
-  --color-bg-section: #1a1a1a;
-  --color-bg-card: #1e1e1e;
+  --color-bg-page: #1e2025;
+  --color-bg-section: #1e2025;
+  --color-bg-card: #1e2025;
   --color-bg-modal: #242424;
 
   /* ── Акцент ── */
@@ -17,12 +17,12 @@
   --color-brand-hover: #c92a2a;
 
   /* ── Текст ── */
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #a0a0a0;
+  --color-text-primary: #fdfdfd;
+  --color-text-secondary: #c3c2bd;
   --color-text-muted: #666666;
 
   /* ── Бордеры ── */
-  --color-border: #2e2e2e;
+  --color-border: #2e3139;
   --color-border-active: #e03131;
 
   /* ── Радиусы ── */
