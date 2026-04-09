@@ -81,6 +81,24 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.explore-shell {
+  padding-inline: var(--explore_padding-inline);
+  max-width: var(--page-shell-max-content-width, 1920);
+  margin-inline: auto;
+
+  @media (min-width: 744px) {
+    --explore_padding-inline: 40px;
+  }
+
+  @media (min-width: 1128px) {
+    --explore_padding-inline: 40px;
+  }
+
+  @media (min-width: 1440px) {
+    --explore_padding-inline: 80px;
+  }
+}
+
 /* ── Типографические утилиты ── */
 .text-nav {
   font-family: var(--font-kelly);

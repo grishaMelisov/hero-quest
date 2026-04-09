@@ -1,5 +1,6 @@
 import './App.css';
 import DrumCard from './components/fortune/DrumCard';
+import FortuneWheel from './components/fortune/FortuneWheel';
 import Footer from './components/layout/Footer';
 import Header from './components/layout/Header';
 import QuestGrid from './components/quests/QuestGrid';
@@ -13,10 +14,12 @@ function App() {
   };
   return (
     <>
-      <div className='flex flex-col items-center justify-center min-h-screen'>
+      <div className='explore-shell overflow-hidden flex flex-col items-center justify-center min-h-screen'>
         <Header />
-        <DrumCard isActive item={item} />
-        <DrumCard item={item} />
+        <div className='overflow-hidden'>
+          <FortuneWheel />
+        </div>
+
         <QuestGrid />
         <Footer />
       </div>
