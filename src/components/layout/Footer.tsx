@@ -44,7 +44,7 @@ const paymentLinks: { label: string; Icon: SvgIcon }[] = [
 
 export default function Footer() {
   return (
-    <footer className='bg-bg-card rounded-t-md border-2 border-b-0 border-border'>
+    <footer className='bg-bg-card rounded-t-md border-2 border-b-0 border-border w-full'>
       {/* Колонки */}
       <div className='grid grid-cols-4 gap-8 px-12 pt-10 pb-8'>
         {/* Колонка 1: Навигация */}
