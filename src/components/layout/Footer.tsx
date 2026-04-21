@@ -1,18 +1,18 @@
 import type { FC, SVGProps } from 'react';
 
-import LogoIcon from '@icons/logo.svg?react';
-import AppstoreIcon from '@icons/appstore.svg?react';
-import GooglePlayIcon from '@icons/googleplay.svg?react';
-import AndroidTvIcon from '@icons/androidtv.svg?react';
-import WindowsIcon from '@icons/windows.svg?react';
-import MacOsIcon from '@icons/macos.svg?react';
-import LinuxIcon from '@icons/linux.svg?react';
-import SbpIcon from '@icons/sbp.svg?react';
-import SberpayIcon from '@icons/sberpay.svg?react';
-import TpayIcon from '@icons/tpay.svg?react';
-import CreditCardIcon from '@icons/credit-card-outline.svg?react';
-import TetherIcon from '@icons/tether.svg?react';
-import TelegramIcon from '@icons/telegram.svg?react';
+import LogoIcon from '@/assets/icons/logo.svg?react';
+import AppstoreIcon from '@/assets/icons/appstore.svg?react';
+import GooglePlayIcon from '@/assets/icons/googleplay.svg?react';
+import AndroidTvIcon from '@/assets/icons/androidtv.svg?react';
+import WindowsIcon from '@/assets/icons/windows.svg?react';
+import MacOsIcon from '@/assets/icons/macos.svg?react';
+import LinuxIcon from '@/assets/icons/linux.svg?react';
+import SbpIcon from '@/assets/icons/sbp.svg?react';
+import SberpayIcon from '@/assets/icons/sberpay.svg?react';
+import TpayIcon from '@/assets/icons/tpay.svg?react';
+import CreditCardIcon from '@/assets/icons/credit-card-outline.svg?react';
+import TetherIcon from '@/assets/icons/tether.svg?react';
+import TelegramIcon from '@/assets/icons/telegram.svg?react';
 
 type SvgIcon = FC<SVGProps<SVGSVGElement>>;
 

@@ -83,7 +83,7 @@ body {
 
 .explore-shell {
   padding-inline: var(--explore_padding-inline);
-  max-width: var(--page-shell-max-content-width, 1920);
+  max-width: var(--page-shell-max-content-width, 1920px);
   margin-inline: auto;
 
   @media (min-width: 744px) {

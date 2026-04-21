@@ -6,7 +6,7 @@ import DrumCard from './DrumCard';
 import Button from '../ui/Button';
 import GiftIcon from '@icons/featured-seasonal-and-gifts.svg?react';
 
-// w-30 = 120px, gap-2 = 8px
+//TODO доделать логику прокрутки - чтото она мне не нравится
 const CARD_WIDTH = 120;
 const CARD_GAP = 8;
 const CARD_STEP = CARD_WIDTH + CARD_GAP;
@@ -55,9 +55,9 @@ export default function FortuneWheel() {
   };
 
   return (
-    <div className='flex flex-col items-center gap-6'>
+    <div className='flex flex-col w-full overflow-hidden items-center gap-6'>
       {/* Барабан */}
-      <div ref={containerRef} className='overflow-hidden w-full'>
+      <div ref={containerRef} className='w-full'>
         <motion.div className='flex gap-2' animate={controls} initial={{ x: 0 }}>
           {extended.map((item, i) => (
             <DrumCard
