@@ -5,6 +5,7 @@ import { drumItems } from '../../data/drumItems';
 import DrumCard from './DrumCard';
 import Button from '../ui/Button';
 import GiftIcon from '@icons/featured-seasonal-and-gifts.svg?react';
+import DayStreak from './DayStreak';
 
 //TODO доделать логику прокрутки - чтото она мне не нравится
 const CARD_WIDTH = 120;
@@ -79,6 +80,7 @@ export default function FortuneWheel() {
       >
         ИСПЫТАТЬ УДАЧУ
       </Button>
+      <DayStreak currentDay={1} />
     </div>
   );
 }
