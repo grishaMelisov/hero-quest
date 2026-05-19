@@ -1,11 +1,20 @@
 import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import type { FC, SVGProps } from 'react';
 import type { DrumItem } from '../../types';
 import Button from '../ui/Button';
 
-import winDiscountIcon from '../../assets/icons/cards/win-discount.svg';
-import winFreeIcon from '../../assets/icons/cards/win-free.svg';
-import winFailIcon from '../../assets/icons/cards/win-fail.svg';
+import WinDiscountIcon from '@icons/cards/win-discount.svg?react';
+import WinFreeIcon from '@icons/cards/win-free.svg?react';
+import WinFailIcon from '@icons/cards/win-fail.svg?react';
+
+type SvgComponent = FC<SVGProps<SVGSVGElement>>;
+
+interface ModalConfig {
+  heading: string;
+  Icon: SvgComponent;
+  description?: string;
+}
 
 interface QuestModalProps {
   isOpen: boolean;
@@ -13,22 +22,22 @@ interface QuestModalProps {
   item: DrumItem | null;
 }
 
-function getModalConfig(item: DrumItem) {
+function getModalConfig(item: DrumItem): ModalConfig {
   switch (item.label) {
     case 'СКИДКА':
       return {
         heading: `Поздравляем!\nВы выиграли`,
-        icon: winDiscountIcon,
+        Icon: WinDiscountIcon,
         description: 'Активируйте в течение 24 часов',
       };
     case 'БЕСПЛАТНЫЕ':
       return {
         heading: `Поздравляем!\nВы выиграли`,
-        icon: winFreeIcon,
+        Icon: WinFreeIcon,
         description: 'Они уже добавлены к вашей подписке',
       };
     case 'ПОПРОБУЙТЕ':
-      return { heading: 'В другой раз повезёт!', icon: winFailIcon };
+      return { heading: 'В другой раз повезёт!', Icon: WinFailIcon };
   }
 }
 
@@ -87,13 +96,11 @@ export default function QuestModal({ isOpen, onClose, item }: QuestModalProps) {
 
 interface ModalContentProps {
   item: DrumItem;
-  config: ReturnType<typeof getModalConfig>;
+  config: ModalConfig;
   onClose: () => void;
 }
 
 function ModalContent({ item, config, onClose }: ModalContentProps) {
-  if (!config) return null;
-
   return (
     <>
       <h2 className='text-text-primary whitespace-pre-wrap text-questmodal-title text-center'>
@@ -102,17 +109,14 @@ function ModalContent({ item, config, onClose }: ModalContentProps) {
 
       <div className='flex items-center gap-4 justify-center'>
         <span className='text-text-primary text-drum-label text-xl font-semibold tracking-wider'>
-          {item.label === 'ПОПРОБУЙТЕ' ? item.label : item.label}
+          {item.label}
         </span>
-        <img
-          src={config.icon}
-          alt={item.label}
-          className='w-24 h-24 object-contain'
-        />
+        <config.Icon className='w-24 h-24' aria-hidden='true' />
         <span className='text-text-primary text-2xl font-bold tracking-wide'>
-          {item.label === 'ПОПРОБУЙТЕ' ? 'завтра' : item.value}
+          {item.value}
         </span>
       </div>
+
       {config.description && (
         <p className='text-block-desc text-text-primary text-center'>
           {config.description}

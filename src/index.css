@@ -8,8 +8,8 @@
 
   /* ── Фоны ── */
   --color-bg-page: #1e2025;
-  --color-bg-section: #1e2025;
-  --color-bg-card: #1e2025;
+  --color-bg-section: var(--color-bg-page);
+  --color-bg-card: var(--color-bg-page);
   --color-bg-card-special: #fdfdfd;
   --color-bg-modal: #242424;
 
