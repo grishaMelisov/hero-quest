@@ -17,13 +17,13 @@ function getModalConfig(item: DrumItem) {
   switch (item.label) {
     case 'СКИДКА':
       return {
-        heading: 'Поздравляем! Вы выиграли',
+        heading: `Поздравляем!\nВы выиграли`,
         icon: winDiscountIcon,
         description: 'Активируйте в течение 24 часов',
       };
     case 'БЕСПЛАТНЫЕ':
       return {
-        heading: 'Поздравляем! Вы выиграли',
+        heading: `Поздравляем!\nВы выиграли`,
         icon: winFreeIcon,
         description: 'Они уже добавлены к вашей подписке',
       };
@@ -96,11 +96,11 @@ function ModalContent({ item, config, onClose }: ModalContentProps) {
 
   return (
     <>
-      <h2 className='text-text-primary text-drum-label text-center font-bold text-2xl leading-tight'>
+      <h2 className='text-text-primary whitespace-pre-wrap text-questmodal-title text-center'>
         {config.heading}
       </h2>
 
-      <div className='flex items-center gap-4 flex-1 justify-center'>
+      <div className='flex items-center gap-4 justify-center'>
         <span className='text-text-primary text-drum-label text-xl font-semibold tracking-wider'>
           {item.label === 'ПОПРОБУЙТЕ' ? item.label : item.label}
         </span>
@@ -113,6 +113,11 @@ function ModalContent({ item, config, onClose }: ModalContentProps) {
           {item.label === 'ПОПРОБУЙТЕ' ? 'завтра' : item.value}
         </span>
       </div>
+      {config.description && (
+        <p className='text-block-desc text-text-primary text-center'>
+          {config.description}
+        </p>
+      )}
 
       <Button variant='filled' fullWidth onClick={onClose}>
         ПРОДОЛЖИТЬ

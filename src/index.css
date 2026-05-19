@@ -156,6 +156,13 @@ body {
   font-weight: 400;
 }
 
+.text-questmodal-title {
+  font-family: var(--font-alumni);
+  font-size: var(--text-section-title);
+  line-height: var(--text-section-title--lh);
+  font-weight: 600;
+}
+
 .text-footer-link {
   font-family: var(--font-kelly);
   font-size: var(--text-footer-link);
