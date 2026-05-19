@@ -13,7 +13,7 @@ const badge = {
   available: { label: 'Доступен', className: 'bg-brand text-text-primary' },
   completed: {
     label: 'Выполнен',
-    className: 'bg-bg-card-special text-text-secondary',
+    className: 'bg-bg-card-special text-text-quest-special-title',
   },
 };
 

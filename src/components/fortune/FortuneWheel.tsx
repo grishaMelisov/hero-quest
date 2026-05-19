@@ -7,6 +7,7 @@ import DrumCard from './DrumCard';
 import Button from '../ui/Button';
 import QuestModal from '../quests/QuestModal';
 import CountdownTimer from './CountdownTimer';
+import ConfettiStars from './ConfettiStars';
 import GiftIcon from '@icons/featured-seasonal-and-gifts.svg?react';
 import FortuneIcon from '@icons/fortune/fortune-icon.svg?react';
 import DayStreak from './DayStreak';
@@ -31,10 +32,12 @@ interface FortuneWheelProps {
 export default function FortuneWheel({ allQuestsCompleted, dayStreak, onSpinComplete, timerExpiresAt, onTimerExpire }: FortuneWheelProps) {
   const controls = useAnimation();
   const containerRef = useRef<HTMLDivElement>(null);
+  const iconRef = useRef<HTMLDivElement>(null);
   const [isSpinning, setIsSpinning] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [winnerItem, setWinnerItem] = useState<DrumItem | null>(null);
+  const [confettiOrigin, setConfettiOrigin] = useState<{ x: number; y: number } | null>(null);
 
   const spin = async () => {
     if (isSpinning || !allQuestsCompleted) return;
@@ -60,6 +63,11 @@ export default function FortuneWheel({ allQuestsCompleted, dayStreak, onSpinComp
       },
     });
 
+    if (iconRef.current) {
+      const r = iconRef.current.getBoundingClientRect();
+      setConfettiOrigin({ x: r.left + r.width / 2, y: r.top + r.height / 2 });
+    }
+
     setActiveIndex(winnerIndex);
     setIsSpinning(false);
     setWinnerItem(drumItems[winnerIndex]);
@@ -83,7 +91,9 @@ export default function FortuneWheel({ allQuestsCompleted, dayStreak, onSpinComp
               Испытайте удачу раз в день <br /> и выигрывайте бонусы для VPN!
             </p>
           </div>
-          <FortuneIcon className='h-16 w-16' />
+          <div ref={iconRef} className='shrink-0'>
+            <FortuneIcon className='h-16 w-16' />
+          </div>
         </div>
 
         {/* Барабан / Таймер */}
@@ -124,6 +134,13 @@ export default function FortuneWheel({ allQuestsCompleted, dayStreak, onSpinComp
         onClose={() => setIsModalOpen(false)}
         item={winnerItem}
       />
+
+      {confettiOrigin && (
+        <ConfettiStars
+          origin={confettiOrigin}
+          onDone={() => setConfettiOrigin(null)}
+        />
+      )}
     </div>
   );
 }
