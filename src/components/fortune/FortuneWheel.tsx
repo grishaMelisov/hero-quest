@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useLayoutEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 
 import { drumItems } from '../../data/drumItems';
@@ -29,20 +29,34 @@ interface FortuneWheelProps {
   onTimerExpire: () => void;
 }
 
-export default function FortuneWheel({ allQuestsCompleted, dayStreak, onSpinComplete, timerExpiresAt, onTimerExpire }: FortuneWheelProps) {
+export default function FortuneWheel({
+  allQuestsCompleted,
+  dayStreak,
+  onSpinComplete,
+  timerExpiresAt,
+  onTimerExpire,
+}: FortuneWheelProps) {
   const controls = useAnimation();
   const containerRef = useRef<HTMLDivElement>(null);
   const iconRef = useRef<HTMLDivElement>(null);
   const [isSpinning, setIsSpinning] = useState(false);
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [winnerItem, setWinnerItem] = useState<DrumItem | null>(null);
-  const [confettiOrigin, setConfettiOrigin] = useState<{ x: number; y: number } | null>(null);
+  const [confettiOrigin, setConfettiOrigin] = useState<{
+    x: number;
+    y: number;
+  } | null>(null);
+
+  useLayoutEffect(() => {
+    const containerWidth = containerRef.current?.offsetWidth ?? 600;
+    const center = containerWidth / 2;
+    const startIndex = drumItems.length;
+    controls.set({ x: center - (startIndex * CARD_STEP + CARD_WIDTH / 2) });
+  }, [controls]);
 
   const spin = async () => {
     if (isSpinning || !allQuestsCompleted) return;
     setIsSpinning(true);
-    setActiveIndex(null);
 
     const containerWidth = containerRef.current?.offsetWidth ?? 600;
     const center = containerWidth / 2;
@@ -68,7 +82,6 @@ export default function FortuneWheel({ allQuestsCompleted, dayStreak, onSpinComp
       setConfettiOrigin({ x: r.left + r.width / 2, y: r.top + r.height / 2 });
     }
 
-    setActiveIndex(winnerIndex);
     setIsSpinning(false);
     setWinnerItem(drumItems[winnerIndex]);
     setIsModalOpen(true);
@@ -100,18 +113,25 @@ export default function FortuneWheel({ allQuestsCompleted, dayStreak, onSpinComp
         {timerExpiresAt !== null ? (
           <CountdownTimer expiresAt={timerExpiresAt} onExpire={onTimerExpire} />
         ) : (
-          <div ref={containerRef} className='w-full'>
+          <div ref={containerRef} className='w-full relative'>
             <motion.div className='flex gap-2' animate={controls} initial={{ x: 0 }}>
               {extended.map((item, i) => (
-                <DrumCard
-                  key={`${item.id}-${i}`}
-                  item={item}
-                  isActive={
-                    activeIndex !== null && i % drumItems.length === activeIndex
-                  }
-                />
+                <DrumCard key={`${item.id}-${i}`} item={item} />
               ))}
             </motion.div>
+            {/* Статичный индикатор центра */}
+            <div className='absolute top-0 left-1/2 -translate-x-1/2 w-30 h-52 border-2 border-brand rounded-md pointer-events-none z-10'>
+              <div
+                className='absolute bottom-0 left-1/2 -translate-x-1/2'
+                style={{
+                  width: 0,
+                  height: 0,
+                  borderLeft: '10px solid transparent',
+                  borderRight: '10px solid transparent',
+                  borderBottom: '24px solid var(--color-brand)',
+                }}
+              />
+            </div>
           </div>
         )}
 
