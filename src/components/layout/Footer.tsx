@@ -44,10 +44,8 @@ const paymentLinks: { label: string; Icon: SvgIcon }[] = [
 
 export default function Footer() {
   return (
-    <footer className='bg-bg-card rounded-t-md border-2 border-b-0 border-border w-full'>
-      {/* Колонки */}
-      <div className='grid grid-cols-4 gap-8 px-12 pt-10 pb-8'>
-        {/* Колонка 1: Навигация */}
+    <footer className='bg-bg-card rounded-t-md border-2 border-b-0 border-border w-full mt-10'>
+      <div className='grid md:grid-cols-4 gap-8 px-4 md:px-6 pt-10 pb-8'>
         <div className='flex flex-col gap-4'>
           <a href='/' className='flex items-center gap-2 mb-2'>
             <LogoIcon className='h-6 w-auto text-text-primary' />
@@ -63,7 +61,6 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Колонка 2: Скачать */}
         <div className='flex flex-col gap-4'>
           <p className='text-footer-heading text-text-primary mb-2'>СКАЧАТЬ</p>
           {downloadLinks.map(({ label, Icon }) => (
@@ -78,7 +75,6 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Колонка 3: Способы оплаты */}
         <div className='flex flex-col gap-4'>
           <p className='text-footer-heading text-text-primary mb-2'>
             СПОСОБЫ ОПЛАТЫ
@@ -95,7 +91,6 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Колонка 4: Поддержка */}
         <div className='flex flex-col gap-4'>
           <p className='text-footer-heading text-text-primary mb-2'>
             ПОДДЕРЖКА 24/7
@@ -122,10 +117,8 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Дивайдер */}
       <hr className='border-0 border-t-2 border-border' />
 
-      {/* Копирайт */}
       <div className='text-center px-12 py-6'>
         <p className='text-footer-link text-text-muted'>
           © 2025 Wollie Development Limited. Все права защищены.

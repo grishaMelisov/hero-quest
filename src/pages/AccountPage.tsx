@@ -27,7 +27,7 @@ export default function AccountPage() {
         </button>
       </div>
 
-      <div className='flex w-full mb-8 items-center justify-center gap-6'>
+      <div className='flex md:flex-row flex-col w-full mb-8 items-center justify-center gap-6'>
         <FortuneWheel />
         <QuestCard variant='special' quest={specialQuest} className='w-full' />
       </div>
