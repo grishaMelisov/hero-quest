@@ -26,6 +26,7 @@
 
   /* ── Бордеры ── */
   --color-border: #2e3139;
+  --color-border-timer: #fdfdfd;
   --color-border-active: #ff0633;
 
   /* ── Радиусы ── */
@@ -53,6 +54,9 @@
 
   --text-section-title: 44px;
   --text-section-title--lh: 44px;
+
+  --text-timer: 44px;
+  --text-timer--lh: 44px;
 
   --text-footer-link: 20px;
   --text-footer-link--lh: 20px;
@@ -133,6 +137,14 @@ body {
   font-family: var(--font-kelly);
   font-size: var(--text-page-title);
   line-height: var(--text-page-title--lh);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.text-timer {
+  font-family: var(--font-kelly);
+  font-size: var(--text-timer);
+  line-height: var(--text-timer--lh);
   font-weight: 400;
   text-transform: uppercase;
 }

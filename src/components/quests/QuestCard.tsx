@@ -6,11 +6,15 @@ interface QuestCardProps {
   quest: QuestItem;
   className?: string;
   variant?: 'default' | 'special';
+  onComplete?: () => void;
 }
 
 const badge = {
   available: { label: 'Доступен', className: 'bg-brand text-text-primary' },
-  completed: { label: 'Выполнен', className: 'bg-bg-modal text-text-secondary' },
+  completed: {
+    label: 'Выполнен',
+    className: 'bg-bg-card-special text-text-secondary',
+  },
 };
 
 const variantStyles = {
@@ -42,6 +46,7 @@ export default function QuestCard({
   quest,
   className = '',
   variant = 'default',
+  onComplete,
 }: QuestCardProps) {
   const { title, description, status, buttonText } = quest;
   const { label, className: badgeClass } = badge[status];
@@ -76,14 +81,17 @@ export default function QuestCard({
         >
           {description}
         </p>
-        <Button
-          variant='filled'
-          color={isSpecial ? 'primary' : 'secondary'}
-          fullWidth
-          className={buttonVariantStyles[variant]}
-        >
-          {buttonText}
-        </Button>
+        {status !== 'completed' && (
+          <Button
+            variant='filled'
+            color={isSpecial ? 'primary' : 'secondary'}
+            fullWidth
+            className={buttonVariantStyles[variant]}
+            onClick={onComplete}
+          >
+            {buttonText}
+          </Button>
+        )}
       </div>
     </div>
   );

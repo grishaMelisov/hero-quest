@@ -2,8 +2,11 @@ import { useRef, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 
 import { drumItems } from '../../data/drumItems';
+import type { DrumItem } from '../../types';
 import DrumCard from './DrumCard';
 import Button from '../ui/Button';
+import QuestModal from '../quests/QuestModal';
+import CountdownTimer from './CountdownTimer';
 import GiftIcon from '@icons/featured-seasonal-and-gifts.svg?react';
 import FortuneIcon from '@icons/fortune/fortune-icon.svg?react';
 import DayStreak from './DayStreak';
@@ -17,14 +20,24 @@ const EXTRA_LOOPS = 6;
 // 4 копии для бесконечной ленты
 const extended = Array.from({ length: 12 }, () => drumItems).flat();
 
-export default function FortuneWheel() {
+interface FortuneWheelProps {
+  allQuestsCompleted: boolean;
+  dayStreak: number;
+  onSpinComplete: () => void;
+  timerExpiresAt: number | null;
+  onTimerExpire: () => void;
+}
+
+export default function FortuneWheel({ allQuestsCompleted, dayStreak, onSpinComplete, timerExpiresAt, onTimerExpire }: FortuneWheelProps) {
   const controls = useAnimation();
   const containerRef = useRef<HTMLDivElement>(null);
   const [isSpinning, setIsSpinning] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [winnerItem, setWinnerItem] = useState<DrumItem | null>(null);
 
   const spin = async () => {
-    if (isSpinning) return;
+    if (isSpinning || !allQuestsCompleted) return;
     setIsSpinning(true);
     setActiveIndex(null);
 
@@ -49,6 +62,9 @@ export default function FortuneWheel() {
 
     setActiveIndex(winnerIndex);
     setIsSpinning(false);
+    setWinnerItem(drumItems[winnerIndex]);
+    setIsModalOpen(true);
+    onSpinComplete();
 
     // Тихий сброс на эквивалентную позицию в 1-й копии для следующего спина
     const resetExtendedIndex = drumItems.length + winnerIndex;
@@ -70,20 +86,24 @@ export default function FortuneWheel() {
           <FortuneIcon className='h-16 w-16' />
         </div>
 
-        {/* Барабан */}
-        <div ref={containerRef} className='w-full'>
-          <motion.div className='flex gap-2' animate={controls} initial={{ x: 0 }}>
-            {extended.map((item, i) => (
-              <DrumCard
-                key={`${item.id}-${i}`}
-                item={item}
-                isActive={
-                  activeIndex !== null && i % drumItems.length === activeIndex
-                }
-              />
-            ))}
-          </motion.div>
-        </div>
+        {/* Барабан / Таймер */}
+        {timerExpiresAt !== null ? (
+          <CountdownTimer expiresAt={timerExpiresAt} onExpire={onTimerExpire} />
+        ) : (
+          <div ref={containerRef} className='w-full'>
+            <motion.div className='flex gap-2' animate={controls} initial={{ x: 0 }}>
+              {extended.map((item, i) => (
+                <DrumCard
+                  key={`${item.id}-${i}`}
+                  item={item}
+                  isActive={
+                    activeIndex !== null && i % drumItems.length === activeIndex
+                  }
+                />
+              ))}
+            </motion.div>
+          </div>
+        )}
 
         {/* Кнопка */}
         <Button
@@ -92,12 +112,18 @@ export default function FortuneWheel() {
           icon={<GiftIcon className='h-5 w-5' />}
           iconPosition='right'
           onClick={spin}
-          disabled={isSpinning}
+          disabled={isSpinning || !allQuestsCompleted || timerExpiresAt !== null}
         >
           ИСПЫТАТЬ УДАЧУ
         </Button>
-        <DayStreak currentDay={1} />
+        <DayStreak currentDay={dayStreak} />
       </div>
+
+      <QuestModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        item={winnerItem}
+      />
     </div>
   );
 }
