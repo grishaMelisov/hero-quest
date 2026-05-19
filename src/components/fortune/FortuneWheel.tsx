@@ -5,6 +5,7 @@ import { drumItems } from '../../data/drumItems';
 import DrumCard from './DrumCard';
 import Button from '../ui/Button';
 import GiftIcon from '@icons/featured-seasonal-and-gifts.svg?react';
+import FortuneIcon from '@icons/fortune/fortune-icon.svg?react';
 import DayStreak from './DayStreak';
 
 //TODO доделать логику прокрутки - чтото она мне не нравится
@@ -56,31 +57,47 @@ export default function FortuneWheel() {
   };
 
   return (
-    <div className='flex flex-col w-full overflow-hidden items-center gap-6'>
-      {/* Барабан */}
-      <div ref={containerRef} className='w-full'>
-        <motion.div className='flex gap-2' animate={controls} initial={{ x: 0 }}>
-          {extended.map((item, i) => (
-            <DrumCard
-              key={`${item.id}-${i}`}
-              item={item}
-              isActive={activeIndex !== null && i % drumItems.length === activeIndex}
-            />
-          ))}
-        </motion.div>
-      </div>
+    <div className='w-full overflow-hidden border-2 p-6 border-border rounded-lg'>
+      <div className='flex flex-col w-full items-center gap-6'>
+        {/* Header */}
+        <div className='flex w-full items-center justify-between'>
+          <div className='flex flex-col items-left gap-1'>
+            <h1 className='text-block-title'>Колесо Фортуны</h1>
+            <p className='text-block-desc text-text-secondary'>
+              Испытайте удачу раз в день <br /> и выигрывайте бонусы для VPN!
+            </p>
+          </div>
+          <FortuneIcon className='h-16 w-16' />
+        </div>
 
-      {/* Кнопка */}
-      <Button
-        variant='filled'
-        icon={<GiftIcon className='h-5 w-5' />}
-        iconPosition='right'
-        onClick={spin}
-        disabled={isSpinning}
-      >
-        ИСПЫТАТЬ УДАЧУ
-      </Button>
-      <DayStreak currentDay={1} />
+        {/* Барабан */}
+        <div ref={containerRef} className='w-full'>
+          <motion.div className='flex gap-2' animate={controls} initial={{ x: 0 }}>
+            {extended.map((item, i) => (
+              <DrumCard
+                key={`${item.id}-${i}`}
+                item={item}
+                isActive={
+                  activeIndex !== null && i % drumItems.length === activeIndex
+                }
+              />
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Кнопка */}
+        <Button
+          fullWidth
+          variant='filled'
+          icon={<GiftIcon className='h-5 w-5' />}
+          iconPosition='right'
+          onClick={spin}
+          disabled={isSpinning}
+        >
+          ИСПЫТАТЬ УДАЧУ
+        </Button>
+        <DayStreak currentDay={1} />
+      </div>
     </div>
   );
 }

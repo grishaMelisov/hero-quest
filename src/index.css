@@ -10,25 +10,32 @@
   --color-bg-page: #1e2025;
   --color-bg-section: #1e2025;
   --color-bg-card: #1e2025;
+  --color-bg-card-special: #fdfdfd;
   --color-bg-modal: #242424;
 
   /* ── Акцент ── */
-  --color-brand: #e03131;
+  --color-brand: #ff0633;
   --color-brand-hover: #c92a2a;
 
   /* ── Текст ── */
   --color-text-primary: #fdfdfd;
   --color-text-secondary: #c3c2bd;
   --color-text-muted: #666666;
+  --color-text-quest-special-title: #1e2025;
+  --color-text-quest-special-desc: #2e3139;
 
   /* ── Бордеры ── */
   --color-border: #2e3139;
-  --color-border-active: #e03131;
+  --color-border-active: #ff0633;
 
   /* ── Радиусы ── */
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
+
+  /* ── Тени ── */
+  --shadow-quest-special:
+    0px 4px 4px 0px rgba(0, 0, 0, 0.3), 0px 8px 12px 6px rgba(0, 0, 0, 0.15);
 
   /* ── Типографика — Kelly Slab ── */
   --text-nav: 20px;
@@ -162,6 +169,14 @@ body {
   text-transform: uppercase;
 }
 
+.text-quest-badge {
+  font-family: var(--font-alumni);
+  font-size: var(--text-block-desc);
+  line-height: var(--text-block-desc--lh);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
 .text-day-counter {
   font-family: var(--font-alumni);
   font-size: var(--text-day-counter);
@@ -187,4 +202,9 @@ body {
   font-weight: 600;
   letter-spacing: 0.01em;
   text-transform: uppercase;
+}
+
+/* ── Утилиты ── */
+.whitespace-pre-wrap {
+  white-space: pre-wrap;
 }
