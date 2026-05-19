@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 import svgr from 'vite-plugin-svgr';
 
 export default defineConfig({
+  base: '/hero-quest/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
